@@ -22,7 +22,7 @@ jobs:
         with:
           python-version: '3.10'
       - name: Create zip file for lambda
-        run: cd src && zip -r code.zip .
+        run: zip -r code.zip .
       - name: AWS CLI v2
         uses: imehedi/actions-awscli-v2@latest
         with:
