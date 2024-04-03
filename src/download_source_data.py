@@ -15,8 +15,7 @@ def lambda_handler(event, context):
 
     data_year_string=str(event['year'])
     data_month_string=str(event['month'])
-    print(data_year_string)
-    print(data_month_string)
+    
     
     
     yellow_taxi_fullurl=default_file_url+yellow_taxi_url_part+data_year_string+'-'+data_month_string+".parquet"
