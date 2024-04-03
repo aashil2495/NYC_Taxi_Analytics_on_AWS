@@ -3,7 +3,7 @@ name: Deploy Lambda Function
 on:
   push:
     paths:
-    - 'C:\Users\aashi\Desktop\NYC_Taxi_CICD\lambda_function.py'
+    - 'lambda_function.py'
     branches: [main]
 
 jobs:
