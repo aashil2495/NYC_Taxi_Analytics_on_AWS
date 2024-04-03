@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install zip tool
-        uses: montudor/action-zip@v1v2
+        uses: montudor/action-zip@v1
         with:
           python-version: '3.10'
       - name: Install dependencies
