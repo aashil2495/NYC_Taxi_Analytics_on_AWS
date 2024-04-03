@@ -7,7 +7,7 @@ from lambda_function import lambda_handler
 def test_lambda_handler(mock_requests_head, mock_boto3_client):
     # Mocking return values for requests.head
     mock_requests_head.return_value = MagicMock(status_code=200)
-
+    
     # Mocking return value for boto3.client.put_object
     mock_boto3_client.return_value = MagicMock()
 

@@ -8,13 +8,13 @@ from dateutil.relativedelta import relativedelta
 def lambda_handler(event, context):
     
     
-    default_file_url='https://d37ci6vzurychx.cloudfront.net/trip-data/'
+    default_file_url='https://d37ci6vzurychx.cloudfront.net/trip-dat/'
     yellow_taxi_url_part='yellow_tripdata_'
     green_taxi_url_part='green_tripdata_'
     
 
     data_year_string=str(event['year'])
-    # data_month_string=str(event['month'])
+    data_month_string=str(event['month'])
     # data_year_string='2024'
     # data_month_string='12'
     
