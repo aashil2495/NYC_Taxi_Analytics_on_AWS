@@ -15,8 +15,8 @@ def lambda_handler(event, context):
 
     # data_year_string=str(event['year'])
     # data_month_string=str(event['month'])
-    data_year_string=2024
-    data_month_string=12
+    data_year_string='2024'
+    data_month_string='12'
     
     
     
