@@ -20,7 +20,7 @@ jobs:
           python -m pip install -- upgrade pip
           pip install -r requirements.txt
       - name: Set up Python
-        uses: actions/set-python@
+        uses: actions/set-python@v2
       - name: Create zip file for lambda
         run: cd src && zip -r code.zip .
       - name: AWS CLI v2
