@@ -22,7 +22,7 @@ def lambda_handler(event, context):
     yellow_taxi_fullurl=default_file_url+yellow_taxi_url_part+data_year_string+'-'+data_month_string+".parquet"
     green_taxi_fullurl=default_file_url+green_taxi_url_part+data_year_string+'-'+data_month_string+".parquet"
 
-    print("yellow_url: "+yellow_taxi_fullurl)
+    
     
     s3=boto3.client('s3')
     bucket="staging-trip-data"
