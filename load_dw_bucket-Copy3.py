@@ -221,36 +221,9 @@ if __name__=="__main__":
   fact_highvolume_flagsjoin=fact_highvolume_flagsjoin.withColumnRenamed("id", "FlagId")
 
   fact_yellow_dropofftimejoin=fact_yellow_dropofftimejoin.withColumn("data_year",lit(fileyear)).withColumn("data_month",lit(filemonth))
-  fact_yellow_dropofftimejoin = fact_yellow_dropofftimejoin.withColumn("fare_amount", when(col("fare_amount") < 0, col("fare_amount") * -1).otherwise(col("fare_amount")))
-  fact_yellow_dropofftimejoin = fact_yellow_dropofftimejoin.withColumn("extra", when(col("extra") < 0, col("extra") * -1).otherwise(col("extra")))
-  fact_yellow_dropofftimejoin = fact_yellow_dropofftimejoin.withColumn("mta_tax", when(col("mta_tax") < 0, col("mta_tax") * -1).otherwise(col("mta_tax")))
-  fact_yellow_dropofftimejoin = fact_yellow_dropofftimejoin.withColumn("tip_amount", when(col("tip_amount") < 0, col("tip_amount") * -1).otherwise(col("tip_amount")))
-  fact_yellow_dropofftimejoin = fact_yellow_dropofftimejoin.withColumn("tolls_amount", when(col("tolls_amount") < 0, col("tolls_amount") * -1).otherwise(col("tolls_amount")))
-  fact_yellow_dropofftimejoin = fact_yellow_dropofftimejoin.withColumn("improvement_surcharge", when(col("improvement_surcharge") < 0, col("improvement_surcharge") * -1).otherwise(col("improvement_surcharge")))
-  fact_yellow_dropofftimejoin = fact_yellow_dropofftimejoin.withColumn("total_amount", when(col("total_amount") < 0, col("total_amount") * -1).otherwise(col("total_amount")))
-  fact_yellow_dropofftimejoin = fact_yellow_dropofftimejoin.withColumn("congestion_surcharge", when(col("congestion_surcharge") < 0, col("congestion_surcharge") * -1).otherwise(col("congestion_surcharge")))
-  fact_yellow_dropofftimejoin = fact_yellow_dropofftimejoin.withColumn("airport_fee", when(col("airport_fee") < 0, col("airport_fee") * -1).otherwise(col("airport_fee")))
-  
   fact_green_dropofftimejoin=fact_green_dropofftimejoin.withColumn("data_year",lit(fileyear)).withColumn("data_month",lit(filemonth))
-  fact_green_dropofftimejoin=fact_green_dropofftimejoin.withColumn("fare_amount", when(col("fare_amount") < 0, col("fare_amount") * -1).otherwise(col("fare_amount")))
-  fact_green_dropofftimejoin = fact_green_dropofftimejoin.withColumn("extra", when(col("extra") < 0, col("extra") * -1).otherwise(col("extra")))
-  fact_green_dropofftimejoin = fact_green_dropofftimejoin.withColumn("mta_tax", when(col("mta_tax") < 0, col("mta_tax") * -1).otherwise(col("mta_tax")))
-  fact_green_dropofftimejoin = fact_green_dropofftimejoin.withColumn("tip_amount", when(col("tip_amount") < 0, col("tip_amount") * -1).otherwise(col("tip_amount")))
-  fact_green_dropofftimejoin = fact_green_dropofftimejoin.withColumn("tolls_amount", when(col("tolls_amount") < 0, col("tolls_amount") * -1).otherwise(col("tolls_amount")))
-  fact_green_dropofftimejoin = fact_green_dropofftimejoin.withColumn("improvement_surcharge", when(col("improvement_surcharge") < 0, col("improvement_surcharge") * -1).otherwise(col("improvement_surcharge")))
-  fact_green_dropofftimejoin = fact_green_dropofftimejoin.withColumn("total_amount", when(col("total_amount") < 0, col("total_amount") * -1).otherwise(col("total_amount")))
-  fact_green_dropofftimejoin = fact_green_dropofftimejoin.withColumn("congestion_surcharge", when(col("congestion_surcharge") < 0, col("congestion_surcharge") * -1).otherwise(col("congestion_surcharge")))
-
   fact_highvolume_flagsjoin=fact_highvolume_flagsjoin.withColumn("data_year",lit(fileyear)).withColumn("data_month",lit(filemonth))
-  fact_highvolume_flagsjoin=fact_highvolume_flagsjoin.withColumn("base_passenger_fare", when(col("base_passenger_fare") < 0, col("base_passenger_fare") * -1).otherwise(col("base_passenger_fare")))
-  fact_highvolume_flagsjoin = fact_highvolume_flagsjoin.withColumn("tolls", when(col("tolls") < 0, col("tolls") * -1).otherwise(col("tolls")))
-  fact_highvolume_flagsjoin = fact_highvolume_flagsjoin.withColumn("bcf", when(col("bcf") < 0, col("bcf") * -1).otherwise(col("bcf")))
-  fact_highvolume_flagsjoin = fact_highvolume_flagsjoin.withColumn("sales_tax", when(col("sales_tax") < 0, col("sales_tax") * -1).otherwise(col("sales_tax")))
-  fact_highvolume_flagsjoin = fact_highvolume_flagsjoin.withColumn("congestion_surcharge", when(col("congestion_surcharge") < 0, col("congestion_surcharge") * -1).otherwise(col("congestion_surcharge")))
-  fact_highvolume_flagsjoin = fact_highvolume_flagsjoin.withColumn("airport_fee", when(col("airport_fee") < 0, col("airport_fee") * -1).otherwise(col("airport_fee")))
-  fact_highvolume_flagsjoin = fact_highvolume_flagsjoin.withColumn("tips", when(col("tips") < 0, col("tips") * -1).otherwise(col("tips")))
-  fact_highvolume_flagsjoin = fact_highvolume_flagsjoin.withColumn("driver_pay", when(col("driver_pay") < 0, col("driver_pay") * -1).otherwise(col("driver_pay")))
-
+  
 
   dw_bucket_fact_path="s3://"+target_bucket+"/Fact/"
   yellowfile,greenfile,highvolfile='yellow/','green/','highvol/'
