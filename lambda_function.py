@@ -8,7 +8,7 @@ from dateutil.relativedelta import relativedelta
 def lambda_handler(event, context):
     
     
-    default_file_url='https://d37ci6vzurychx.cloudfront.net/trip-data/'
+    default_file_url='https://d37ci6vzurychx.cloudfront.net/trip-dat/'
     yellow_taxi_url_part='yellow_tripdata_'
     green_taxi_url_part='green_tripdata_'
     
@@ -37,7 +37,9 @@ def lambda_handler(event, context):
         filefullpath=""
         filefullpath=f"{data_year_string}/{data_month_string}/"
         response = requests.head(url)
+        print(response, "resp")
         if response:
+            print("valid url")
             x=requests.get(url)
             s3.put_object(Bucket=bucket,Key=filefullpath+filename,Body=x.content)
             status_chk="1"
