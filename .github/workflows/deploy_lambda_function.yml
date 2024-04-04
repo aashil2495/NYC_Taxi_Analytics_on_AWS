@@ -19,7 +19,7 @@ jobs:
       - name: Run tests
         run: python -m pytest tests/check_lambda_function.py
 
-  deploy lambda_function:
+  deploy_lambda_function:
     needs: test
     runs-on: ubuntu-latest
 
@@ -48,7 +48,7 @@ jobs:
          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
          AWS_DEFAULT_REGION: "us-east-1" 
 
-  deploy dw_loading:
+  deploy_dw_loading:
     needs: test
     runs-on: ubuntu-latest
 
