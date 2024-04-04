@@ -231,8 +231,7 @@ if __name__=="__main__":
   fact_yellow_dropofftimejoin.repartition(1).write.mode("overwrite").option("header","true").csv(dw_bucket_fact_path+yellowfile+fileyear+"/"+filemonth+"/")
   fact_green_dropofftimejoin.repartition(1).write.mode("overwrite").option("header","true").csv(dw_bucket_fact_path+greenfile+fileyear+"/"+filemonth+"/")
   fact_highvolume_flagsjoin.repartition(1).write.mode("overwrite").option("header","true").csv(dw_bucket_fact_path+highvolfile+fileyear+"/"+filemonth+"/")
-#   filelist=list(os.listdir(dw_bucket_fact_path+highvolfile+fileyear+"/"+filemonth+"/"))
-#   os.rename(dw_bucket_fact_path+highvolfile+fileyear+"/"+filemonth+"/"+filelist[0],dw_bucket_fact_path+highvolfile+fileyear+"/"+filemonth+"/"+"highvol.csv")
+
 
 
 
