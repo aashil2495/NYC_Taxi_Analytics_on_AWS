@@ -8,7 +8,7 @@ from dateutil.relativedelta import relativedelta
 def lambda_handler(event, context):
     
     
-    default_file_url='https://d37ci6vzurychx.cloudfront.net/trip-dat/'
+    default_file_url='https://d37ci6vzurychx.cloudfront.net/trip-data/'
     yellow_taxi_url_part='yellow_tripdata_'
     green_taxi_url_part='green_tripdata_'
     
