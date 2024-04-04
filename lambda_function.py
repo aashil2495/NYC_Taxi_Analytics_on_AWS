@@ -38,7 +38,7 @@ def lambda_handler(event, context):
         filefullpath=f"{data_year_string}/{data_month_string}/"
         response = requests.head(url)
         print(response, "resp")
-        if response:
+        if response.status_code==200:
             print("valid url")
             x=requests.get(url)
             s3.put_object(Bucket=bucket,Key=filefullpath+filename,Body=x.content)
