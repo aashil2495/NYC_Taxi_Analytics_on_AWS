@@ -12,8 +12,7 @@ if __name__=="__main__":
   spark = SparkSession.builder.appName("test").getOrCreate()
   fileyear = sys.argv[1]
   filemonth = sys.argv[2]
-  print(fileyear)
-  print(filemonth)
+  
   source_bucket, target_bucket = "staging-trip-data", "processed-trip-data"
   
   # fileyear,filemonth='2023','10'
