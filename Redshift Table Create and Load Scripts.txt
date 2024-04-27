@@ -1,0 +1,441 @@
+--------------------------------------------------------Creating Fact Tables----------------------------------------
+create table fact_highvolume_fhv(
+trip_miles decimal(8,2),
+trip_time int,
+base_passenger_fare decimal(8,2),
+tolls decimal(8,2),
+bcf decimal(8,2),
+sales_tax decimal(8,2),
+congestion_surcharge decimal(8,2),
+airport_fee decimal(8,2),
+tip_amount decimal(8,2),
+driver_pay decimal(8,2),
+flag_id int,
+ pu_location_id int,
+  do_location_id int,
+  license_number varchar(20),
+  pickup_date_id int,
+  dropoff_date_id int,
+  dispatching_baseno_id int,
+  originating_baseno_id int,
+  dim_pickup_time_id int,
+  dim_dropoff_time_id int
+);
+
+alter table fact_highvolume_fhv
+add constraint fk_fact_highvolume_fhv_flag_id
+foreign key (flag_id)
+references dim_flags (id);
+
+alter table fact_highvolume_fhv
+add constraint fk_fact_highvolume_fhv_pu_location_id
+foreign key (pu_location_id)
+references dim_zone (location_id);
+
+alter table fact_highvolume_fhv
+add constraint fk_fact_highvolume_fhv_do_location_id
+foreign key (do_location_id)
+references dim_zone (location_id);
+
+alter table fact_highvolume_fhv
+add constraint fk_fact_highvolume_fhv_license_number
+foreign key (license_number)
+references dim_license (license_number);
+
+alter table fact_highvolume_fhv
+add constraint fk_fact_highvolume_fhv_pickup_date
+foreign key (pickup_date_id)
+references dim_date (dateid);
+
+alter table fact_highvolume_fhv
+add constraint fk_fact_highvolume_fhv_dropoff_date
+foreign key (dropoff_date_id)
+references dim_date (dateid);
+
+alter table fact_highvolume_fhv
+add constraint fk_fact_highvolume_fhv_dispatching_base_no_id
+foreign key (dispatching_baseno_id)
+references dim_base (license_no);
+
+alter table fact_highvolume_fhv
+add constraint fk_fact_highvolume_fhv_originating_base_no_id
+foreign key (originating_baseno_id)
+references dim_base (license_no);
+
+alter table fact_highvolume_fhv
+add constraint fk_fact_highvolume_fhv_pickup_time_id
+foreign key (dim_pickup_time_id)
+references dim_time (time_id);
+
+alter table fact_highvolume_fhv
+add constraint fk_fact_highvolume_fhv_dropoff_time_id
+foreign key (dim_dropoff_time_id)
+references dim_time (time_id);
+
+create table fact_yellow(
+passenger_count int,
+trip_distance decimal(9,2),
+fare_amount decimal(7,2),
+extra decimal(7,2),
+mta_tax decimal(7,2),
+tip_amount decimal(7,2),
+tolls_amount decimal(7,2),
+improvement_surcharge decimal(7,2),
+congestion_surcharge decimal(7,2),
+total_amount decimal(7,2),
+airport_fee decimal(7,2),
+ trip_time int,
+  po_location_id int,
+  do_location_id int,
+  vendor_id int,
+  rate_code_id int,
+  payment_id int,
+  pickup_date_id int,
+  dropoff_date_id int,
+  dim_pickup_time_id int,
+  dim_dropoff_time_id int,
+  data_year varchar(4),
+  data_month varchar(2)
+);
+
+alter table fact_yellow
+add constraint fk_fact_yellow_date_id
+foreign key (pickup_date_id)
+references dim_date (dateid);
+
+alter table fact_yellow
+add constraint fk_fact_yellow_vendor_id
+foreign key (vendor_id)
+references dim_vendor (vendor_id);
+
+alter table fact_yellow
+add constraint fk_fact_yellow_ratecode_id
+foreign key (rate_code_id)
+references dim_ratecode (ratecode_id);
+
+alter table fact_yellow
+add constraint fk_fact_yellow_pu_location_id
+foreign key (po_location_id)
+references dim_zone (location_id);
+
+alter table fact_yellow
+add constraint fk_fact_yellow_payment_id
+foreign key (payment_id)
+references dim_payment (payment_id);
+
+alter table fact_yellow
+add constraint fk_fact_yellow_do_location_id
+foreign key (do_location_id)
+references dim_zone (location_id);
+
+alter table fact_yellow
+add constraint fk_fact_yellow_pickup_time_id
+foreign key (dim_pickup_time_id)
+references dim_time (time_id);
+
+alter table fact_yellow
+add constraint fk_fact_yellow_dropoff_time_id
+foreign key (dim_dropoff_time_id)
+references dim_time (time_id);
+
+alter table fact_yellow
+add constraint fk_fact_yellow_dropoff_date_id
+foreign key (dropoff_date_id)
+references dim_date (dateid);
+
+
+create table fact_green(
+  passenger_count int,
+  trip_distance decimal(8,2),
+  fare_amount decimal(7,2),
+  extra decimal(7,2),
+  mta_tax decimal(7,2),
+  tip_amount decimal(7,2),
+  tolls_amount decimal(7,2),
+  improvement_surcharge decimal(7,2),
+  total_amount decimal(7,2),
+  congestion_surcharge decimal(7,2),
+  trip_time int,
+  trip_type_id int,
+  pickup_date_id int,
+  vendor_id int,
+  rate_code_id int,
+  pu_location_id int,
+  payment_id int,
+  do_location_id int,
+  pickup_time_id int,
+  dropoff_time_id int,
+  dropoff_date_id int,
+data_year varchar(4),
+  data_month varchar(2)
+);
+
+alter table fact_green
+add constraint fk_fact_green_trip_type_id
+foreign key (trip_type_id)
+references  dim_triptype (triptypeid);
+
+alter table fact_green
+add constraint fk_fact_green_pickup_date_id
+foreign key (pickup_date_id)
+references  dim_date (dateid);
+
+alter table fact_green
+add constraint fk_fact_green_vendor_id
+foreign key (vendor_id)
+references  dim_vendor (vendor_id);
+
+alter table fact_green
+add constraint fk_fact_green_rate_code_id
+foreign key (rate_code_id)
+references dim_ratecode (ratecode_id);
+
+alter table fact_green
+add constraint fk_fact_green_pu_location_id
+foreign key (pu_location_id)
+references dim_zone (location_id);
+
+alter table fact_green
+add constraint fk_fact_green_payment_id
+foreign key (payment_id)
+references dim_payment (payment_id);
+
+alter table fact_green
+add constraint fk_fact_green_do_location_id
+foreign key (do_location_id)
+references dim_zone (location_id);
+
+alter table fact_green
+add constraint fk_fact_green_pickup_time_id
+foreign key (pickup_time_id)
+references dim_time (time_id);
+
+alter table fact_green
+add constraint fk_fact_green_dropoff_time_id
+foreign key (dropoff_time_id)
+references dim_time (time_id);
+
+alter table fact_green
+add constraint fk_fact_green_dropoff_date_id
+foreign key (dropoff_date_id)
+references dim_date (dateid);
+
+
+---------------------------------------------- Dimension Tables Creation------------------------------------------------------
+
+
+create table dim_base(
+license_no varchar(10) primary key,
+entity_name varchar(50),
+type_of_base varchar(50)
+);
+
+create table dim_flags(
+id int primary key,
+shared_request_flag varchar(1),
+shared_match_flag varchar(1),
+wav_request_flag varchar(1),
+wav_match_flag varchar(1)
+);
+
+create table dim_license(
+license_number varchar(10) primary key,
+license_holder varchar(10)
+);
+
+create table dim_date(
+dateid int primary key,
+year int,
+quarter int,
+month int,
+day int,
+day_of_week int,
+week_number int,
+is_weekday int,
+is_weekend int,
+full_date date 
+);
+
+create table dim_triptype(
+triptypeid int primary key,
+trip_type varchar(20)
+);
+
+create table dim_payment(
+payment_id int primary key,
+payment_type varchar(20)
+);
+
+create table dim_zone(
+location_id int primary key,
+borough varchar(20),
+zone varchar(50),
+service_zone varchar(20)
+);
+
+create table dim_ratecode(
+ratecode_id int primary key,
+ratecode varchar(20)
+);
+
+create table dim_vendor(
+vendor_id int primary key,
+vendor varchar(50)
+);
+
+create table dim_time(
+time_id int primary key,
+hour int,
+minute int
+);
+
+--------------------------------------------------Dimension Tables Load (Manual One-Time Load)------------------------------------
+COPY dim_date
+(
+full_date,
+year,
+quarter,
+month,
+day,
+day_of_week,
+week_number,
+is_weekday,
+is_weekend,
+dateid
+)
+FROM 's3://processed-trip-data/Dimension/dim_date/part-00000-178b1337-b637-4d67-a516-a123288a4ea4-c000.csv'
+CREDENTIALS 'aws_iam_role=arn:aws:iam::733529898541:role/Redshift_can_access_S3'
+CSV
+IGNOREHEADER 1;
+
+COPY dim_base
+(
+license_no,
+entity_name,
+type_of_base
+)
+FROM 's3://processed-trip-data/Dimension/dim_base/part-00000-eae288c1-a0d8-4d22-b9c6-9245e3882645-c000.csv'
+CREDENTIALS 'aws_iam_role=arn:aws:iam::733529898541:role/Redshift_can_access_S3'
+CSV
+IGNOREHEADER 1;
+
+COPY dim_flags
+(
+id,
+shared_request_flag,
+shared_match_flag,
+wav_request_flag,
+wav_match_flag
+)
+FROM 's3://processed-trip-data/Dimension/dim_flags/part-00000-6f3d278a-d425-47f6-b02a-50aadd789663-c000.csv'
+CREDENTIALS 'aws_iam_role=arn:aws:iam::733529898541:role/Redshift_can_access_S3'
+CSV
+IGNOREHEADER 1;
+
+COPY dim_license
+(
+license_number,
+license_holder
+)
+FROM 's3://processed-trip-data/Dimension/dim_license/part-00000-20d28e07-3100-4f95-a622-d5a6d681b142-c000.csv'
+CREDENTIALS 'aws_iam_role=arn:aws:iam::733529898541:role/Redshift_can_access_S3'
+CSV
+IGNOREHEADER 1;
+
+COPY dim_payment
+(
+payment_id,
+payment_type
+)
+FROM 's3://processed-trip-data/Dimension/dim_paymenttype/part-00000-43f8950f-7423-40ed-b426-b32451a58c8e-c000.csv'
+CREDENTIALS 'aws_iam_role=arn:aws:iam::733529898541:role/Redshift_can_access_S3'
+CSV
+IGNOREHEADER 1;
+
+COPY dim_ratecode
+(
+ratecode_id,
+ratecode
+)
+FROM 's3://processed-trip-data/Dimension/dim_ratecode/part-00000-5cf4796a-f155-450b-8635-d9fe23b764ee-c000.csv'
+CREDENTIALS 'aws_iam_role=arn:aws:iam::733529898541:role/Redshift_can_access_S3'
+CSV
+IGNOREHEADER 1;
+
+COPY dim_time
+(
+hour,
+minute,
+time_id
+)
+FROM 's3://processed-trip-data/Dimension/dim_time/part-00000-5f24517e-7212-4602-a719-a9e6f227e41f-c000.csv'
+CREDENTIALS 'aws_iam_role=arn:aws:iam::733529898541:role/Redshift_can_access_S3'
+CSV
+IGNOREHEADER 1;
+
+COPY dim_triptype(
+triptypeid,
+trip_type
+)
+FROM 's3://processed-trip-data/Dimension/dim_triptype/part-00000-43680110-51fa-4b29-b1b1-bafa90f1a86f-c000.csv'
+CREDENTIALS 'aws_iam_role=arn:aws:iam::733529898541:role/Redshift_can_access_S3'
+CSV
+IGNOREHEADER 1;
+
+COPY dim_vendor(
+vendor_id,
+vendor
+)
+FROM 's3://processed-trip-data/Dimension/dim_vendor/part-00000-39116089-2699-4b59-91bf-92c9fbf3f28c-c000.csv'
+CREDENTIALS 'aws_iam_role=arn:aws:iam::733529898541:role/Redshift_can_access_S3'
+CSV
+IGNOREHEADER 1;
+
+COPY dim_zone(
+location_id,
+borough,
+zone,
+service_zone
+)
+FROM 's3://processed-trip-data/Dimension/dim_zone/part-00000-640e0430-d7ce-450a-b18f-2b4376982b70-c000.csv'
+CREDENTIALS 'aws_iam_role=arn:aws:iam::733529898541:role/Redshift_can_access_S3'
+CSV
+IGNOREHEADER 1;
+
+-------------------------------------------------------Store Procedure Creation for Loading Fact green and yellow tables--------------------------------------
+
+
+CREATE OR REPLACE PROCEDURE public.sp_insert_into_fact_yellow("year" character varying(4), "month" character varying(2), filename character varying(100))
+ LANGUAGE plpgsql 
+AS $$ 
+begin 
+delete from fact_yellow where data_year=year and data_month=month;
+ EXECUTE 'COPY fact_yellow ( vendor_id, passenger_count, trip_distance, 
+rate_code_id, po_location_id, do_location_id, payment_id, fare_amount, 
+extra, mta_tax, tip_amount, tolls_amount, improvement_surcharge, 
+total_amount, congestion_surcharge, airport_fee, trip_time, pickup_date_id,
+ dropoff_date_id, dim_pickup_time_id, dim_dropoff_time_id, data_year, data_month ) 
+FROM ''s3://processed-trip-data/Fact/yellow/' || year || '/' || month || '/' || filename || ''' 
+CREDENTIALS ''aws_iam_role=arn:aws:iam::733529898541:role/Redshift_can_access_S3'' 
+CSV
+ IGNOREHEADER 1;'; 
+end; $$
+
+CREATE OR REPLACE PROCEDURE public.sp_insert_into_fact_green("year" character varying(4), "month" character varying(2), filename character varying(100)) 
+LANGUAGE
+ plpgsql
+ AS $$
+ begin 
+delete from fact_green where data_year=year and data_month=month;
+ EXECUTE 'COPY fact_green ( vendor_id, rate_code_id, pu_location_id,
+ do_location_id, passenger_count, trip_distance, fare_amount,
+ extra, mta_tax, tip_amount, tolls_amount, improvement_surcharge,
+ total_amount, payment_id, trip_type_id, congestion_surcharge,
+ trip_time, pickup_date_id, dropoff_date_id, pickup_time_id,
+ dropoff_time_id, data_year, data_month ) 
+FROM ''s3://processed-trip-data/Fact/green/' || year || '/' || month || '/' || filename || ''' 
+CREDENTIALS ''aws_iam_role=arn:aws:iam::733529898541:role/Redshift_can_access_S3'' 
+CSV 
+IGNOREHEADER 1;'; 
+end; $$
+
